@@ -25,10 +25,10 @@ class DynamicArray:
         self.storage[index] = value
     def add_to_front(self, value):
         self.insert(0, value)
-    def slice(self, beginning_index, end_index): # default value
-        # beginning and end
-        # create subarray to store value
-        # copy beginning  to end to subarray
-        # decide how this works.  What happens  to the original array?
-        # leave it alone?  Or cut out what  we're slicing
-        # return subarray  
+    # def slice(self, beginning_index, end_index): # default value
+    #     # beginning and end
+    #     # create subarray to store value
+    #     # copy beginning  to end to subarray
+    #     # decide how this works.  What happens  to the original array?
+    #     # leave it alone?  Or cut out what  we're slicing
+    #     # return subarray  
