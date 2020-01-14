@@ -7,6 +7,8 @@ class LinkedPair:
         self.value = value
         self.next = None
 
+
+
 class HashTable:
     '''
     A hash table that with `capacity` buckets
@@ -52,9 +54,6 @@ class HashTable:
 
         Fill this in.
         '''
-        if self.count == self.capacity:
-            self.resize()
-            return
         index=self._hash_mod(key)
         if self.storage[index] is None:
             self.storage[index]=LinkedPair(key, value)
@@ -66,6 +65,9 @@ class HashTable:
             if previous.key==key:
                 previous.value=value
             current = current.next
+        if self.count == self.capacity:
+            self.resize()
+            return
 		# Add a new node at the end of the list with provided key/value
 
         previous.next = LinkedPair(key, value)
@@ -103,11 +105,11 @@ class HashTable:
         index=self._hash_mod(key)
         current = self.storage[index]
         if current.key==key:
-            print(current.value)
+            print("inside",current.value)
             return current.value
         while current.key!=key:
             current=current.next
-        print(current.value)
+        print("outside",current.value)
         return current.value
 
 
