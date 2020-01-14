@@ -105,11 +105,9 @@ class HashTable:
         index=self._hash_mod(key)
         current = self.storage[index]
         if current.key==key:
-            print("inside",current.value)
             return current.value
         while current.key!=key:
             current=current.next
-        print("outside",current.value)
         return current.value
 
 
@@ -130,8 +128,8 @@ class HashTable:
                 while i.next:
                     i=i.next
                     self.insert(i.key,i.value)
-        self.storage=new_storage
-        print(self.storage)
+ 
+
 
 
 
