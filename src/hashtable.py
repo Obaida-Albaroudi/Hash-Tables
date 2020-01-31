@@ -7,12 +7,15 @@ class LinkedPair:
         self.value = value
         self.next = None
 
+
+
 class HashTable:
     '''
     A hash table that with `capacity` buckets
     that accepts string keys
     '''
     def __init__(self, capacity):
+        self.count=0
         self.capacity = capacity  # Number of buckets in the hash table
         self.storage = [None] * capacity
 
@@ -51,7 +54,24 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index=self._hash_mod(key)
+        if self.storage[index] is None:
+            self.storage[index]=LinkedPair(key, value)
+            return
+        current = self.storage[index]
+        previous=self.storage[index]
+        while current is not None:
+            previous = current
+            if previous.key==key:
+                previous.value=value
+            current = current.next
+        if self.count == self.capacity:
+            self.resize()
+            return
+		# Add a new node at the end of the list with provided key/value
+
+        previous.next = LinkedPair(key, value)
+        self.count+=1
 
 
 
@@ -63,7 +83,15 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index=self._hash_mod(key)
+        current = self.storage[index]
+        while current.key!=key:
+            current=current.next
+        if current.value==None:
+            print("return_value is None")
+        else:
+            current.value=None
+        
 
 
     def retrieve(self, key):
@@ -74,7 +102,13 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index=self._hash_mod(key)
+        current = self.storage[index]
+        if current.key==key:
+            return current.value
+        while current.key!=key:
+            current=current.next
+        return current.value
 
 
     def resize(self):
@@ -84,7 +118,18 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        self.capacity*=2
+        new_storage=[None]*self.capacity
+        old_storage=self.storage
+        self.storage=new_storage
+        for i in old_storage:
+            if i is not None:
+                self.insert(i.key,i.value)
+                while i.next:
+                    i=i.next
+                    self.insert(i.key,i.value)
+ 
+
 
 
 
